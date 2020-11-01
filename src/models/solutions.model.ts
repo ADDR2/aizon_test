@@ -9,7 +9,6 @@ import ScreensSchema, { Screen } from './screens.model';
 
 const { Schema } = DBService.connection;
 
-//Parent Schema
 export interface Solution extends Document {
     company: string;
     business: string;
@@ -41,4 +40,4 @@ const schema = new Schema({
     screens: [ScreensSchema]
 }).index({ company: 1, business: 1 }, { unique: true });
 
-export default DBService.connection.model('solutions', schema);
+export default DBService.connection.model<Solution>('solutions', schema);

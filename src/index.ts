@@ -9,6 +9,7 @@ import bodyParser from "body-parser";
 /* Import middlewares */
 
 /* Import routes */
+import SolutionRoutes from './routes/solutions.route';
 
 /* Import services */
 import DBService from './services/dB.service';
@@ -47,7 +48,7 @@ async function start(): Promise<unknown> {
 		app.use(morgan('combined'));
 	
 		/* Define routes */
-		//app.use("/users", userRoutes);
+		app.use("/solutions", SolutionRoutes);
 	
 		app.listen(PORT, () => {
 			console.log(new ColoredString('Express server is up and running on port ' + PORT).green());

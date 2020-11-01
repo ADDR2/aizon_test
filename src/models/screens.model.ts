@@ -38,4 +38,4 @@ const ScreensSchema = new Schema({
     widgets: [WidgetsSchema]
 });
 
-export default DBService.connection.model('screens', ScreensSchema);
+export default ScreensSchema;
