@@ -32,4 +32,4 @@ const WidgetsSchema = new Schema({
     }
 });
 
-export default DBService.connection.model('widgets', WidgetsSchema);
+export default WidgetsSchema;
