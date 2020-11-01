@@ -1,6 +1,6 @@
 
 /* 3rd party types */
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 /* Services */
 import DBService from '../services/dB.service';
@@ -15,7 +15,7 @@ export interface Screen extends Document {
     height: number;
     page?: number;
     title?: string;
-    widgets: Widget[];
+    widgets: Types.DocumentArray<Widget>;
 }
 
 const ScreensSchema = new Schema({
@@ -27,7 +27,7 @@ const ScreensSchema = new Schema({
     height: {
         type: Number,
         min: [0, 'Height cannot be negative'],
-        required: [true, 'Heigth is required'] 
+        required: [true, 'Heigth is required']
     },
     page: {
         type: Number
