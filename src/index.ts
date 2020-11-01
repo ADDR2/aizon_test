@@ -11,6 +11,7 @@ import bodyParser from "body-parser";
 /* Import routes */
 import SolutionRoutes from './routes/solutions.route';
 import ScreenRoutes from './routes/screens.route';
+import WidgetsRoutes from './routes/widgets.routes';
 
 /* Import services */
 import DBService from './services/dB.service';
@@ -51,6 +52,7 @@ async function start(): Promise<unknown> {
 		/* Define routes */
 		app.use("/solutions", SolutionRoutes);
 		app.use("/screens", ScreenRoutes);
+		app.use("/widgets", WidgetsRoutes);
 	
 		app.listen(PORT, () => {
 			console.log(new ColoredString('Express server is up and running on port ' + PORT).green());

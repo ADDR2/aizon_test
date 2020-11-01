@@ -55,4 +55,29 @@ export const SCREENS_NOT_FOUND_ERROR: HttpErrorParams = {
     httpCode: 404
 };
 
+export const WIDGET_CREATE_ERROR: HttpErrorParams = {
+    message: 'Could not create Widget. Check body params.',
+    code: 10,
+    httpCode: 400
+};
+
+export const WiDGET_UPDATE_ERROR: HttpErrorParams = {
+    message: 'Could not update widget. Check body params.',
+    code: 11,
+    httpCode: 400
+};
+
+export const WIDGET_DELETE_ERROR: HttpErrorParams = {
+    message: 'Could not found the solution/screen/widget. Check id param.',
+    code: 12,
+    httpCode: 404
+};
+
+export const WIDGET_NOT_FOUND_ERROR: HttpErrorParams = {
+    message: 'Could not found the solution/screen/widget. Check id param.',
+    code: 13,
+    httpCode: 404
+};
+
+
 

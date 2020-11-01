@@ -47,7 +47,7 @@ const updateScreen = (req: Request, res: Response) => {
 /*
     @param req: request object
     @param res: response object
-    function createScreen: endpoint that delete a screen
+    function deleteScreen: endpoint that delete a screen
 */
 const deleteScreen = (req: Request, res: Response) => {
 
@@ -64,7 +64,7 @@ const deleteScreen = (req: Request, res: Response) => {
 /*
     @param req: request object
     @param res: response object
-    function createScreen: endpoint that get a screen
+    function getById: endpoint that get a screen
 */
 const getById = (req: Request, res: Response) => {
 
