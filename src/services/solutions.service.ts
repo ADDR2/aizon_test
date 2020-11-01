@@ -3,7 +3,6 @@ import SolutionSchema, { Solution } from '../models/solutions.model';
 
 /* Types */
 import { CreateSolutionBody, UpdateSolutionBody } from '../interfaces/Solutions';
-import solutionsModel from '../models/solutions.model';
 
 class SolutionsService {
     static create(createSolutionBody: CreateSolutionBody): Promise<Solution> {
