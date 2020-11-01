@@ -31,6 +31,9 @@ class DBService extends EventEmitter {
             this.defineListeners();
             await mongoose.connect(this.URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+            mongoose.set('useFindAndModify', false);
+            mongoose.set('useCreateIndex', true);
+
             return mongoose;
         } catch(error) {
             console.error(new ColoredString(`Could not connect to DB :/ ---> ${error.message}`).red());
