@@ -1,5 +1,5 @@
 /* 3rd party types */
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 /* Services */
 import DBService from '../services/dB.service';
@@ -14,7 +14,7 @@ export interface Solution extends Document {
     business: string;
     description?: string;
     created?: Date;
-    screens: Screen[];
+    screens: Types.DocumentArray<Screen>;
 }  
 
 const schema = new Schema({
