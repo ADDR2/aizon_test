@@ -4,7 +4,7 @@ services:
   app:
     container_name: aizonTest
     hostname: aizonTest
-    command: 'node ./dist/index.js'
+    command: 'npm start'
     environment:
       - "TZ=Europe/Barcelona"
     build: .

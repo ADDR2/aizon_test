@@ -4,14 +4,14 @@ import { SCREENS_CREATE_ERROR, SCREENS_UPDATE_ERROR, SCREENS_DELETE_ERROR, SCREE
 import ColoredString from '../helpers/coloredStrings';
 
 /* Services */
-import ScreenService from '../services/screens.service';
+import ScreensService from '../services/screens.service';
 import { CreateScreensBody, UpdateScreensBody } from '../interfaces/Screens';
 import { Screen } from '../models/screens.model'
 
 class ScreensController {
-    static async createScreens(createScreensBody: CreateScreensBody, id: String): Promise<any> {
+    static async createScreens(createScreensBody: CreateScreensBody, id: String): Promise<Screen> {
         try {
-            const screen = await ScreenService.create(createScreensBody, id);
+            const screen = await ScreensService.create(createScreensBody, id);
             return screen;
         } catch (error) {
             console.error(new ColoredString(error.message).red());
@@ -19,9 +19,9 @@ class ScreensController {
         }
     }
 
-    static async updateScreen(updateScreenBody: UpdateScreensBody, id: String): Promise<any> {
+    static async updateScreen(updateScreenBody: UpdateScreensBody, id: String): Promise<UpdateScreensBody> {
         try {
-            const screen = await ScreenService.update(updateScreenBody, id);
+            const screen = await ScreensService.update(updateScreenBody, id);
             return screen;
         } catch (error) {
             console.error(new ColoredString(error.message).red());
@@ -31,7 +31,7 @@ class ScreensController {
 
     static async deleteScreen(screenid: string, id: String): Promise<Boolean> {
         try {
-            return await ScreenService.delete(screenid, id);
+            return await ScreensService.delete(screenid, id);
         } catch (error) {
             console.error(new ColoredString(error.message).red());
             throw new HttpError(SCREENS_DELETE_ERROR);
@@ -40,7 +40,7 @@ class ScreensController {
 
     static async getById(screenId: string, id: String): Promise<Screen> {
         try {
-            return await ScreenService.getById(screenId, id);
+            return await ScreensService.getById(screenId, id);
         } catch (error) {
             console.error(new ColoredString(error.message).red());
             throw new HttpError(SCREENS_NOT_FOUND_ERROR);

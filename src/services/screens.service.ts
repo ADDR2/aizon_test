@@ -1,26 +1,24 @@
 /* Local libraries */
 import { Screen } from '../models/screens.model';
-import SolutionModel, { Solution } from '../models/solutions.model';
+import SolutionSchema from '../models/solutions.model';
 
 
 /* Types */
 import { CreateScreensBody, UpdateScreensBody } from '../interfaces/Screens';
-import { Types } from 'mongoose';
-import solutionsModel from '../models/solutions.model';
 
-class ScreenService {
+class ScreensService {
     static async create(createScreensBody: CreateScreensBody, id: String): Promise<Screen> {
 
-        const solution = await SolutionModel.findOne({ _id: id });
+        const solution = await SolutionSchema.findOne({ _id: id });
 
         if (!solution) throw new Error('Solution not found');
 
-        await SolutionModel.updateOne({ _id: id }, { $push: { screens: <Screen>createScreensBody } });
+        await SolutionSchema.updateOne({ _id: id }, { $push: { screens: <Screen>createScreensBody } });
         return <Screen>createScreensBody;
     };
 
-    static async update(updateScreensBody: UpdateScreensBody, id: String) : Promise<any>{
-        const solution = await SolutionModel.findOne({ '_id': id });
+    static async update(updateScreensBody: UpdateScreensBody, id: String) : Promise<UpdateScreensBody>{
+        const solution = await SolutionSchema.findOne({ '_id': id });
         const oldScreen = solution.screens.id(updateScreensBody.screenId);
 
         if(!oldScreen) throw new Error('Screen not found');
@@ -32,7 +30,7 @@ class ScreenService {
     }
 
     static async delete(screenId: string, id: String): Promise<Boolean>{
-        const solution = await SolutionModel.findOne({ '_id': id });
+        const solution = await SolutionSchema.findOne({ '_id': id });
 
         if(!solution) throw new Error('Solution not found');
 
@@ -43,7 +41,7 @@ class ScreenService {
     }
 
     static async getById(screenId: string, id: String) : Promise<Screen>{
-        const solution = await SolutionModel.findOne({ '_id': id });
+        const solution = await SolutionSchema.findOne({ '_id': id });
         if(!solution) throw new Error('Solution not found');
 
         const screen : Screen = solution.screens.id(screenId);
@@ -54,4 +52,4 @@ class ScreenService {
     }
 }
 
-export default ScreenService;
+export default ScreensService;

@@ -1,4 +1,3 @@
-
 /* 3rd party types */
 import { Document } from 'mongoose';
 

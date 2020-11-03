@@ -9,6 +9,3 @@ export interface UpdateWidgetBody {
     height?: number;
     type?: string;
 }
-
-
-

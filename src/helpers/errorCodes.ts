@@ -20,13 +20,13 @@ export const SOLUTIONS_UPDATE_ERROR: HttpErrorParams = {
 };
 
 export const SOLUTIONS_DELETE_ERROR: HttpErrorParams = {
-    message: 'Could not found the solution. Check id param.',
+    message: 'Could not find the solution. Check id param.',
     code: 4,
     httpCode: 404
 };
 
 export const SOLUTIONS_NOT_FOUND_ERROR: HttpErrorParams = {
-    message: 'Could not found any solution. Check id param.',
+    message: 'Could not find any solution. Check id param.',
     code: 5,
     httpCode: 404
 };
@@ -44,13 +44,13 @@ export const SCREENS_UPDATE_ERROR: HttpErrorParams = {
 };
 
 export const SCREENS_DELETE_ERROR: HttpErrorParams = {
-    message: 'Could not found the solution or screen. Check id param.',
+    message: 'Could not find the solution or screen. Check id param.',
     code: 8,
     httpCode: 404
 };
 
 export const SCREENS_NOT_FOUND_ERROR: HttpErrorParams = {
-    message: 'Could not found the solution or the screen. Check id param.',
+    message: 'Could not find the solution or the screen. Check id param.',
     code: 9,
     httpCode: 404
 };
@@ -68,13 +68,13 @@ export const WiDGET_UPDATE_ERROR: HttpErrorParams = {
 };
 
 export const WIDGET_DELETE_ERROR: HttpErrorParams = {
-    message: 'Could not found the solution/screen/widget. Check id param.',
+    message: 'Could not find the solution/screen/widget. Check id param.',
     code: 12,
     httpCode: 404
 };
 
 export const WIDGET_NOT_FOUND_ERROR: HttpErrorParams = {
-    message: 'Could not found the solution/screen/widget. Check id param.',
+    message: 'Could not find the solution/screen/widget. Check id param.',
     code: 13,
     httpCode: 404
 };
