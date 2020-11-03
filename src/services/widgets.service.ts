@@ -1,15 +1,15 @@
 /* Local libraries */
 import { Widget } from '../models/widgets.model';
-import SolutionModel, { Solution } from '../models/solutions.model';
+import SolutionSchema from '../models/solutions.model';
 
 
 /* Types */
 import { CreateWidgetBody, UpdateWidgetBody } from '../interfaces/Widgets';
 
-class WidgetService {
+class WidgetsService {
     static async create(createWidgetBody: CreateWidgetBody, screeId: string, id: String): Promise<Widget> {
 
-        const solution = await SolutionModel.findOne({ _id: id });
+        const solution = await SolutionSchema.findOne({ _id: id });
 
         if (!solution) throw new Error('Solution not found');
         const screen = solution.screens.id(screeId);
@@ -23,7 +23,7 @@ class WidgetService {
     };
 
     static async update(updateWidgetBody: UpdateWidgetBody, screeId: string, id: String, widgetId: string) : Promise<any>{
-        const solution = await SolutionModel.findOne({ '_id': id });
+        const solution = await SolutionSchema.findOne({ '_id': id });
 
         if (!solution) throw new Error('Solution not found');
 
@@ -42,7 +42,7 @@ class WidgetService {
     }
 
     static async delete(widgetId: string, screenId: string, id: string): Promise<Boolean>{
-        const solution = await SolutionModel.findOne({ '_id': id });
+        const solution = await SolutionSchema.findOne({ '_id': id });
 
         if (!solution) throw new Error('Solution not found');
 
@@ -58,7 +58,7 @@ class WidgetService {
     }
 
     static async getById(widgetId: string, screenId: string, id: string) : Promise<Widget>{
-        const solution = await SolutionModel.findOne({ '_id': id });
+        const solution = await SolutionSchema.findOne({ '_id': id });
 
         if (!solution) throw new Error('Solution not found');
 
@@ -70,4 +70,4 @@ class WidgetService {
     }
 }
 
-export default WidgetService;
+export default WidgetsService;
