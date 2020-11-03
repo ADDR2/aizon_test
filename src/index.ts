@@ -7,11 +7,13 @@ import express from "express";
 import bodyParser from "body-parser";
 
 /* Import middlewares */
+import Authentication from './middlewares/authentication.middleware';
 
 /* Import routes */
 import SolutionRoutes from './routes/solutions.route';
 import ScreenRoutes from './routes/screens.route';
 import WidgetsRoutes from './routes/widgets.routes';
+import UsersRoutes from './routes/users.route';
 
 /* Import services */
 import DBService from './services/dB.service';
@@ -35,13 +37,13 @@ async function start(): Promise<unknown> {
 
 		console.log(new ColoredString('Connected to DB :)').green());
 
-		console.log(new ColoredString('Server will start running soon :)').cyan());
+		console.log(new ColoredString('Server will start running soon').cyan());
 		const app = express();
 	
 		const PORT = process.env.PORT;
 	
 		/* Set authentication */
-		//passport.use(authentication);
+		passport.use(Authentication);
 	
 		/* Body parser to read json */
 		app.use(bodyParser.json());
@@ -50,12 +52,13 @@ async function start(): Promise<unknown> {
 		app.use(morgan('combined'));
 	
 		/* Define routes */
+		app.use("/users", UsersRoutes);
 		app.use("/solutions", SolutionRoutes);
 		app.use("/screens", ScreenRoutes);
 		app.use("/widgets", WidgetsRoutes);
 	
 		app.listen(PORT, () => {
-			console.log(new ColoredString('Express server is up and running on port ' + PORT).green());
+			console.log(new ColoredString(`Express server is up and running on port ${PORT} :)`).green());
 		});
 	
 		return app;
@@ -66,13 +69,3 @@ async function start(): Promise<unknown> {
 }
 
 start();
-
-process.on('SIGINT', async () => {
-	//await InitController.signOutUser();
-	process.exit(0);
-});
-
-process.on('SIGTERM', async () => {
-	//await InitController.signOutUser();
-	process.exit(0);
-});

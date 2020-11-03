@@ -2,9 +2,6 @@
 import express, { Response, Request } from "express";
 import passport from 'passport';
 
-/* Local libraries */
-import ColoredString from '../helpers/coloredStrings';
-
 /* Controllers */
 import SolutionsController from "../controllers/solutions.controller";
 
@@ -30,9 +27,9 @@ const createSolution = (req: Request, res: Response) => {
 /*
     @param req: request object
     @param res: response object
-    function udpateSolution: endpoint that update a solution
+    function updateSolution: endpoint that updates a solution
 */
-const udpateSolution = (req: Request, res: Response) => {
+const updateSolution = (req: Request, res: Response) => {
 
     SolutionsController.updateSolution(req.body, req.params.id)
         .then(client => {
@@ -47,7 +44,7 @@ const udpateSolution = (req: Request, res: Response) => {
 /*
     @param req: request object
     @param res: response object
-    function deleteSolution: endpoint that delete a solution
+    function deleteSolution: endpoint that deletes a solution
 */
 const deleteSolution = (req: Request, res: Response) => {
 
@@ -64,7 +61,7 @@ const deleteSolution = (req: Request, res: Response) => {
 /*
     @param req: request object
     @param res: response object
-    function getAllSolution: endpoint that get all the solution
+    function getAllSolution: endpoint that gets all the solution
 */
 const getAllSolutions = (req: Request, res: Response) => {
 
@@ -81,7 +78,7 @@ const getAllSolutions = (req: Request, res: Response) => {
 /*
     @param req: request object
     @param res: response object
-    function getById: endpoint that get a solution
+    function getById: endpoint that gets a solution
 */
 const getById = (req: Request, res: Response) => {
 
@@ -102,7 +99,7 @@ Example of use:
     method: POST
     url: "http://localhost:3000/solutions"
 */
-router.post("/", /*passport.authenticate('jwt', { session: false }),*/ createSolution);
+router.post("/", passport.authenticate('jwt', { session: false }), createSolution);
 
 /*
 Route of updateSolution
@@ -110,7 +107,7 @@ Example of use:
     method: PATH
     url: "http://localhost:3000/solutions/:id"
 */
-router.patch("/:id", /*passport.authenticate('jwt', { session: false }),*/ udpateSolution);
+router.patch("/:id", passport.authenticate('jwt', { session: false }), updateSolution);
 
 /*
 Route of deleteSolution
@@ -118,15 +115,15 @@ Example of use:
     method: DELETE
     url: "http://localhost:3000/solutions/:id"
 */
-router.delete("/:id", /*passport.authenticate('jwt', { session: false }),*/ deleteSolution);
+router.delete("/:id", passport.authenticate('jwt', { session: false }), deleteSolution);
 
 /*
-Route of getAll
+Route of getAllSolutions
 Example of use:
     method: GET
     url: "http://localhost:3000/solutions"
 */
-router.get("/", /*passport.authenticate('jwt', { session: false }),*/ getAllSolutions);
+router.get("/", passport.authenticate('jwt', { session: false }), getAllSolutions);
 
 /*
 Route of getById
@@ -134,7 +131,7 @@ Example of use:
     method: GET
     url: "http://localhost:3000/solutions/:id"
 */
-router.get("/:id", /*passport.authenticate('jwt', { session: false }),*/ getById);
+router.get("/:id", passport.authenticate('jwt', { session: false }), getById);
 
 
 export default router;

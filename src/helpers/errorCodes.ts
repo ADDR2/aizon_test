@@ -79,5 +79,38 @@ export const WIDGET_NOT_FOUND_ERROR: HttpErrorParams = {
     httpCode: 404
 };
 
+export const USER_NOT_FOUND_ERROR: HttpErrorParams = {
+    message: 'Could not find user. Check your username.',
+    code: 14,
+    httpCode: 404
+};
 
+export const INCORRECT_PASSWORD: HttpErrorParams = {
+    message: 'Could not authenticate user. Check your credentials.',
+    code: 15,
+    httpCode: 401
+};
 
+export const USER_SIGNED_UP: HttpErrorParams = {
+    message: 'User is already signed up. Check username.',
+    code: 16,
+    httpCode: 400
+};
+
+export const USER_LOGIN_ERROR: HttpErrorParams = {
+    message: 'Could not login user. Check body.',
+    code: 17,
+    httpCode: 400
+};
+
+export const USER_SIGNUP_ERROR: HttpErrorParams = {
+    message: 'Could not signup user. Check body.',
+    code: 18,
+    httpCode: 400
+};
+
+export const USER_LOGOUT_ERROR: HttpErrorParams = {
+    message: 'Could not logout user.',
+    code: 19,
+    httpCode: 500
+};
