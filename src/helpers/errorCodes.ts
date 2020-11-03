@@ -79,5 +79,14 @@ export const WIDGET_NOT_FOUND_ERROR: HttpErrorParams = {
     httpCode: 404
 };
 
+export const USER_NOT_FOUND_ERROR: HttpErrorParams = {
+    message: 'Could not find user. Check your username.',
+    code: 14,
+    httpCode: 404
+};
 
-
+export const INCORRECT_PASSWORD: HttpErrorParams = {
+    message: 'Could not authenticate user. Check your credentials.',
+    code: 15,
+    httpCode: 401
+};
