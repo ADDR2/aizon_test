@@ -7,6 +7,7 @@ import express from "express";
 import bodyParser from "body-parser";
 
 /* Import middlewares */
+import Authentication from './middlewares/authentication.middleware';
 
 /* Import routes */
 import SolutionRoutes from './routes/solutions.route';
@@ -42,7 +43,7 @@ async function start(): Promise<unknown> {
 		const PORT = process.env.PORT;
 	
 		/* Set authentication */
-		//passport.use(authentication);
+		passport.use(Authentication);
 	
 		/* Body parser to read json */
 		app.use(bodyParser.json());
@@ -68,13 +69,3 @@ async function start(): Promise<unknown> {
 }
 
 start();
-
-process.on('SIGINT', async () => {
-	//await InitController.signOutUser();
-	process.exit(0);
-});
-
-process.on('SIGTERM', async () => {
-	//await InitController.signOutUser();
-	process.exit(0);
-});

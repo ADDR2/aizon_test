@@ -2,9 +2,6 @@
 import express, { Response, Request } from "express";
 import passport from 'passport';
 
-/* Local libraries */
-import ColoredString from '../helpers/coloredStrings';
-
 /* Controllers */
 import ScreensController from "../controllers/screens.controller";
 
@@ -17,9 +14,9 @@ const router = express.Router();
 */
 const createScreen = (req: Request, res: Response) => {
 
-    ScreensController.createScreens(req.body, req.params.id)
-        .then(client => {
-            res.status(201).send(client);
+    ScreensController.createScreens(req.body, req.params.solutionId)
+        .then(screen => {
+            res.status(201).send(screen);
         })
         .catch(error => {
             res.status(error.httpCode).send(error.message);
@@ -30,13 +27,13 @@ const createScreen = (req: Request, res: Response) => {
 /*
     @param req: request object
     @param res: response object
-    function createScreen: endpoint that update a screen
+    function createScreen: endpoint that updates a screen
 */
 const updateScreen = (req: Request, res: Response) => {
 
-    ScreensController.updateScreen(req.body, req.params.id)
-        .then(client => {
-            res.status(201).send(client);
+    ScreensController.updateScreen(req.body, req.params.solutionId)
+        .then(screen => {
+            res.status(201).send(screen);
         })
         .catch(error => {
             res.status(error.httpCode).send(error.message);
@@ -47,13 +44,13 @@ const updateScreen = (req: Request, res: Response) => {
 /*
     @param req: request object
     @param res: response object
-    function deleteScreen: endpoint that delete a screen
+    function deleteScreen: endpoint that deletes a screen
 */
 const deleteScreen = (req: Request, res: Response) => {
 
-    ScreensController.deleteScreen(req.params.screenId, req.params.id)
-        .then(client => {
-            res.status(204).send(client);
+    ScreensController.deleteScreen(req.params.screenId, req.params.solutionId)
+        .then(wasDeleted => {
+            res.status(204).send(wasDeleted);
         })
         .catch(error => {
             res.status(error.httpCode).send(error.message);
@@ -64,13 +61,13 @@ const deleteScreen = (req: Request, res: Response) => {
 /*
     @param req: request object
     @param res: response object
-    function getById: endpoint that get a screen
+    function getById: endpoint that gets a screen
 */
 const getById = (req: Request, res: Response) => {
 
-    ScreensController.getById(req.params.screenId, req.params.id)
-        .then(client => {
-            res.status(200).send(client);
+    ScreensController.getById(req.params.screenId, req.params.solutionId)
+        .then(screen => {
+            res.status(200).send(screen);
         })
         .catch(error => {
             res.status(error.httpCode).send(error.message);
@@ -83,32 +80,32 @@ const getById = (req: Request, res: Response) => {
 Route of createScreen
 Example of use:
     method: POST
-    url: "http://localhost:3000/screens/:id"
+    url: "http://localhost:3000/screens/:solutionId"
 */
-router.post("/:id", /*passport.authenticate('jwt', { session: false }),*/ createScreen);
+router.post("/:solutionId", passport.authenticate('jwt', { session: false }), createScreen);
 
 /*
 Route of updateScreen
 Example of use:
-    method: PATH
-    url: "http://localhost:3000/screens/:id"
+    method: PATCH
+    url: "http://localhost:3000/screens/:solutionId"
 */
-router.patch("/:id", /*passport.authenticate('jwt', { session: false }),*/ updateScreen);
+router.patch("/:solutionId", passport.authenticate('jwt', { session: false }), updateScreen);
 
 /*
-Route of updateScreen
+Route of deleteScreen
 Example of use:
-    method: PATH
-    url: "http://localhost:3000/screens/:screenId/solution/:id"
+    method: DELETE
+    url: "http://localhost:3000/screens/:screenId/solution/:solutionId"
 */
-router.delete("/:screenId/solution/:id", /*passport.authenticate('jwt', { session: false }),*/ deleteScreen);
+router.delete("/:screenId/solution/:solutionId", passport.authenticate('jwt', { session: false }), deleteScreen);
 
 /*
 Route of getById
 Example of use:
     method: GET
-    url: "http://localhost:3000/screens/:screenId/solution/:id"
+    url: "http://localhost:3000/screens/:screenId/solution/:solutionId"
 */
-router.get("/:screenId/solution/:id", /*passport.authenticate('jwt', { session: false }),*/ getById);
+router.get("/:screenId/solution/:solutionId", passport.authenticate('jwt', { session: false }), getById);
 
 export default router;

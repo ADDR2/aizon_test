@@ -108,3 +108,9 @@ export const USER_SIGNUP_ERROR: HttpErrorParams = {
     code: 18,
     httpCode: 400
 };
+
+export const USER_LOGOUT_ERROR: HttpErrorParams = {
+    message: 'Could not logout user.',
+    code: 19,
+    httpCode: 500
+};

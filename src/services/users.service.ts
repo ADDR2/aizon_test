@@ -11,8 +11,7 @@ import {
 } from '../helpers/errorCodes';
 
 /* Models */
-import UsersSchema from '../models/users.model';
-
+import UsersSchema, { User } from '../models/users.model';
 
 /* Types */
 import { LoginUserBody, SignupUserBody } from '../interfaces/Users';
@@ -52,7 +51,15 @@ class UsersService {
 
         await newUser.save();
 
-        return await UsersService.login({ username, password });
+        return UsersService.login({ username, password });
+    }
+
+    static async getUserById(id: string): Promise<User> {
+        return await UsersSchema.findOne({ _id: id });
+    }
+
+    static async logout({ id }: User): Promise<void> {
+        await UsersSchema.updateOne({ _id: id }, { token: null });
     }
 }
 

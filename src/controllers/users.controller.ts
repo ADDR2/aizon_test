@@ -1,13 +1,18 @@
 /* Local libraries */
 import ColoredString from '../helpers/coloredStrings';
 import HttpError from '../helpers/httpError';
-import { USER_LOGIN_ERROR, USER_SIGNUP_ERROR } from '../helpers/errorCodes';
+import {
+    USER_LOGIN_ERROR,
+    USER_SIGNUP_ERROR,
+    USER_LOGOUT_ERROR
+} from '../helpers/errorCodes';
 
 /* Services */
 import UsersService from '../services/users.service';
 
 /* Types */
 import { LoginUserBody, SignupUserBody } from '../interfaces/Users';
+import { User } from '../models/users.model';
 
 class UsersController {
     static async loginUser(loginUserBody: LoginUserBody): Promise<string> {
@@ -36,12 +41,12 @@ class UsersController {
         }
     }
 
-    static async logoutUser(loginUserBody: LoginUserBody): Promise<string> {
+    static async logoutUser(loggedUser: User): Promise<void> {
         try {
-            return await UsersService.login(loginUserBody);
+            await UsersService.logout(loggedUser);
         } catch (error) {
             console.error(new ColoredString(error.message).red());
-            throw error;
+            throw new HttpError(USER_LOGOUT_ERROR);
         }
     }
 }

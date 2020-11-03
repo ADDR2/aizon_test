@@ -5,6 +5,9 @@ import passport from 'passport';
 /* Controllers */
 import UsersController from "../controllers/users.controller";
 
+/* Types */
+import { RequestWithAuthenticatedUser } from "../interfaces/CustomRequest";
+
 const router = express.Router();
 
 /*
@@ -46,11 +49,11 @@ const signupUser = (req: Request, res: Response) => {
     @param res: response object
     function loginUser: endpoint that logs out a user
 */
-const logoutUser = (req: Request, res: Response) => {
+const logoutUser = (req: RequestWithAuthenticatedUser, res: Response) => {
 
-    UsersController.loginUser(req.body)
-        .then(token => {
-            res.status(200).send(token);
+    UsersController.logoutUser(req.user)
+        .then(() => {
+            res.status(204).send();
         })
         .catch(error => {
             res.status(error.httpCode).send(error.message);
@@ -81,7 +84,7 @@ Example of use:
     method: POST
     url: "http://localhost:3000/users/logout"
 */
-router.post("/logout", logoutUser);
+router.post("/logout", passport.authenticate('jwt', { session: false }), logoutUser);
 
 
 

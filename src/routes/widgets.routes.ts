@@ -2,9 +2,6 @@
 import express, { Response, Request } from "express";
 import passport from 'passport';
 
-/* Local libraries */
-import ColoredString from '../helpers/coloredStrings';
-
 /* Controllers */
 import WidgetsController from "../controllers/widgets.controller";
 
@@ -17,7 +14,7 @@ const router = express.Router();
 */
 const createWidget = (req: Request, res: Response) => {
 
-    WidgetsController.createWidget(req.body, req.params.screenId, req.params.id)
+    WidgetsController.createWidget(req.body, req.params.screenId, req.params.solutionId)
         .then(client => {
             res.status(201).send(client);
         })
@@ -35,7 +32,7 @@ const createWidget = (req: Request, res: Response) => {
 
 const updateWidget = (req: Request, res: Response) => {
 
-    WidgetsController.updateWidget(req.body, req.params.screenId, req.params.id, req.params.widgetId)
+    WidgetsController.updateWidget(req.body, req.params.screenId, req.params.solutionId, req.params.widgetId)
         .then(client => {
             res.status(200).send(client);
         })
@@ -52,7 +49,7 @@ const updateWidget = (req: Request, res: Response) => {
 */
 const deleteWidget = (req: Request, res: Response) => {
 
-    WidgetsController.deleteWidget(req.params.widgetId, req.params.screenId, req.params.id)
+    WidgetsController.deleteWidget(req.params.widgetId, req.params.screenId, req.params.solutionId)
         .then(client => {
             res.status(204).send(client);
         })
@@ -69,7 +66,7 @@ const deleteWidget = (req: Request, res: Response) => {
 */
 const getById = (req: Request, res: Response) => {
 
-    WidgetsController.getById(req.params.widgetId, req.params.screenId, req.params.id)
+    WidgetsController.getById(req.params.widgetId, req.params.screenId, req.params.solutionId)
         .then(client => {
             res.status(200).send(client);
         })
@@ -83,37 +80,51 @@ const getById = (req: Request, res: Response) => {
 Route of createWidget
 Example of use:
     method: POST
-    url: "http://localhost:3000/widgets/:screenId/solution/:id"
+    url: "http://localhost:3000/widgets/:screenId/solution/:solutionId"
 */
-router.post("/:screenId/solution/:id", /*passport.authenticate('jwt', { session: false }),*/ createWidget);
+router.post(
+    "/:screenId/solution/:solutionId",
+    passport.authenticate('jwt', { session: false }),
+    createWidget
+);
 
 
 /*
 Route of updateWidget
 Example of use:
     method: PATCH
-    url: "http://localhost:3000/widgets/:widgetId/screen/:screenId/solution/:id"
+    url: "http://localhost:3000/widgets/:widgetId/screen/:screenId/solution/:solutionId"
 */
-router.patch("/:widgetId/screen/:screenId/solution/:id", /*passport.authenticate('jwt', { session: false }),*/ updateWidget);
+router.patch(
+    "/:widgetId/screen/:screenId/solution/:solutionId",
+    passport.authenticate('jwt', { session: false }),
+    updateWidget
+);
 
 /*
 Route of deleteWidget
 Example of use:
     method: DELETE
-    url: "http://localhost:3000/widgets/:widgetId/screen/:screenId/solution/:id"
+    url: "http://localhost:3000/widgets/:widgetId/screen/:screenId/solution/:solutionId"
 */
-router.delete("/:widgetId/screen/:screenId/solution/:id", /*passport.authenticate('jwt', { session: false }),*/ deleteWidget);
+router.delete(
+    "/:widgetId/screen/:screenId/solution/:solutionId",
+    passport.authenticate('jwt', { session: false }),
+    deleteWidget
+);
 
 
 /*
 Route of getById
 Example of use:
     method: GET
-    url: "http://localhost:3000/widgets/:widgetId/screen/:screenId/solution/:id"
+    url: "http://localhost:3000/widgets/:widgetId/screen/:screenId/solution/:solutionId"
 */
-router.get("/:widgetId/screen/:screenId/solution/:id", /*passport.authenticate('jwt', { session: false }),*/ getById);
-
-
+router.get(
+    "/:widgetId/screen/:screenId/solution/:solutionId",
+    passport.authenticate('jwt', { session: false }),
+    getById
+);
 
 
 export default router;
