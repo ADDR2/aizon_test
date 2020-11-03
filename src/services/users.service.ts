@@ -4,19 +4,22 @@ import jwt from 'jsonwebtoken';
 
 /* Local libraries */
 import HttpError from '../helpers/httpError';
-import { USER_NOT_FOUND_ERROR, INCORRECT_PASSWORD } from '../helpers/errorCodes';
+import {
+    USER_NOT_FOUND_ERROR,
+    INCORRECT_PASSWORD,
+    USER_SIGNED_UP
+} from '../helpers/errorCodes';
 
 /* Models */
-import UsersSchema, { User } from '../models/users.model';
+import UsersSchema from '../models/users.model';
 
 
 /* Types */
-import { LoginUserBody } from '../interfaces/Users';
+import { LoginUserBody, SignupUserBody } from '../interfaces/Users';
 
 class UsersService {
     static async login({ username, password }: LoginUserBody): Promise<string> {
-
-        const user = <User>(await UsersSchema.findOne({ username }));
+        const user = await UsersSchema.findOne({ username });
 
         if (!user) throw new HttpError(USER_NOT_FOUND_ERROR);
 
@@ -35,7 +38,22 @@ class UsersService {
         await UsersSchema.updateOne({ _id: user.id }, { token });
 
         return token;
-    };
+    }
+
+    static async signup({ username, password, role }: SignupUserBody): Promise<string> {
+        const user = await UsersSchema.findOne({ username });
+
+        if (user) throw new HttpError(USER_SIGNED_UP);
+
+        const newUser = new UsersSchema();
+        newUser.username = username;
+        newUser.password = crypto.createHash("sha256").update(password).digest("hex");
+        newUser.role = role;
+
+        await newUser.save();
+
+        return await UsersService.login({ username, password });
+    }
 }
 
 export default UsersService;

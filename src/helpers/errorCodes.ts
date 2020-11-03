@@ -90,3 +90,21 @@ export const INCORRECT_PASSWORD: HttpErrorParams = {
     code: 15,
     httpCode: 401
 };
+
+export const USER_SIGNED_UP: HttpErrorParams = {
+    message: 'User is already signed up. Check username.',
+    code: 16,
+    httpCode: 400
+};
+
+export const USER_LOGIN_ERROR: HttpErrorParams = {
+    message: 'Could not login user. Check body.',
+    code: 17,
+    httpCode: 400
+};
+
+export const USER_SIGNUP_ERROR: HttpErrorParams = {
+    message: 'Could not signup user. Check body.',
+    code: 18,
+    httpCode: 400
+};

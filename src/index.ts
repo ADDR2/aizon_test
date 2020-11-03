@@ -12,6 +12,7 @@ import bodyParser from "body-parser";
 import SolutionRoutes from './routes/solutions.route';
 import ScreenRoutes from './routes/screens.route';
 import WidgetsRoutes from './routes/widgets.routes';
+import UsersRoutes from './routes/users.route';
 
 /* Import services */
 import DBService from './services/dB.service';
@@ -35,7 +36,7 @@ async function start(): Promise<unknown> {
 
 		console.log(new ColoredString('Connected to DB :)').green());
 
-		console.log(new ColoredString('Server will start running soon :)').cyan());
+		console.log(new ColoredString('Server will start running soon').cyan());
 		const app = express();
 	
 		const PORT = process.env.PORT;
@@ -50,12 +51,13 @@ async function start(): Promise<unknown> {
 		app.use(morgan('combined'));
 	
 		/* Define routes */
+		app.use("/users", UsersRoutes);
 		app.use("/solutions", SolutionRoutes);
 		app.use("/screens", ScreenRoutes);
 		app.use("/widgets", WidgetsRoutes);
 	
 		app.listen(PORT, () => {
-			console.log(new ColoredString('Express server is up and running on port ' + PORT).green());
+			console.log(new ColoredString(`Express server is up and running on port ${PORT} :)`).green());
 		});
 	
 		return app;

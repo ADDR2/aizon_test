@@ -22,10 +22,7 @@ const usersSchema = new Schema({
     },
     role: {
         type: String,
-        enum: {
-            values: ['admin', 'user'],
-            message: 'Role has to be either admin or user'
-        },
+        enum: ['admin', 'user'],
         required: [true, 'Role is required']
     },
     password: {
@@ -37,4 +34,4 @@ const usersSchema = new Schema({
     }
 });
 
-export default DBService.connection.model('users', usersSchema);
+export default DBService.connection.model<User>('users', usersSchema);

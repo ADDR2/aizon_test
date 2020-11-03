@@ -16,7 +16,41 @@ const loginUser = (req: Request, res: Response) => {
 
     UsersController.loginUser(req.body)
         .then(token => {
-            res.status(201).send(token);
+            res.status(200).send(token);
+        })
+        .catch(error => {
+            res.status(error.httpCode).send(error.message);
+        })
+        ;
+}
+
+/*
+    @param req: request object
+    @param res: response object
+    function loginUser: endpoint that signs up a user
+*/
+const signupUser = (req: Request, res: Response) => {
+
+    UsersController.signupUser(req.body)
+        .then(token => {
+            res.status(200).send(token);
+        })
+        .catch(error => {
+            res.status(error.httpCode).send(error.message);
+        })
+        ;
+}
+
+/*
+    @param req: request object
+    @param res: response object
+    function loginUser: endpoint that logs out a user
+*/
+const logoutUser = (req: Request, res: Response) => {
+
+    UsersController.loginUser(req.body)
+        .then(token => {
+            res.status(200).send(token);
         })
         .catch(error => {
             res.status(error.httpCode).send(error.message);
@@ -32,6 +66,22 @@ Example of use:
     url: "http://localhost:3000/users/login"
 */
 router.post("/login", loginUser);
+
+/*
+Route of signupUser
+Example of use:
+    method: POST
+    url: "http://localhost:3000/users/signup"
+*/
+router.post("/signup", signupUser);
+
+/*
+Route of logoutUser
+Example of use:
+    method: POST
+    url: "http://localhost:3000/users/logout"
+*/
+router.post("/logout", logoutUser);
 
 
 
