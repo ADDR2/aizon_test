@@ -38,6 +38,6 @@ const schema = new Schema({
         type: Date
     },
     screens: [ScreensSchema]
-}).index({ company: 1, business: 1 }, { unique: true });
+});
 
 export default DBService.connection.model<Solution>('solutions', schema);

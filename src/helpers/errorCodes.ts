@@ -114,3 +114,9 @@ export const USER_LOGOUT_ERROR: HttpErrorParams = {
     code: 19,
     httpCode: 500
 };
+
+export const USER_DELETE_ERROR: HttpErrorParams = {
+    message: 'Could not delete user.',
+    code: 20,
+    httpCode: 500
+};

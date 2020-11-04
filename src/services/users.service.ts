@@ -61,6 +61,10 @@ class UsersService {
     static async logout({ id }: User): Promise<void> {
         await UsersSchema.updateOne({ _id: id }, { token: null });
     }
+
+    static async delete({ id }: User): Promise<void> {
+        await UsersSchema.deleteOne({ _id: id });
+    }
 }
 
 export default UsersService;

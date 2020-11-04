@@ -4,7 +4,8 @@ import HttpError from '../helpers/httpError';
 import {
     USER_LOGIN_ERROR,
     USER_SIGNUP_ERROR,
-    USER_LOGOUT_ERROR
+    USER_LOGOUT_ERROR,
+    USER_DELETE_ERROR
 } from '../helpers/errorCodes';
 
 /* Services */
@@ -47,6 +48,15 @@ class UsersController {
         } catch (error) {
             console.error(new ColoredString(error.message).red());
             throw new HttpError(USER_LOGOUT_ERROR);
+        }
+    }
+
+    static async deleteUser(loggedUser: User): Promise<void> {
+        try {
+            await UsersService.delete(loggedUser);
+        } catch (error) {
+            console.error(new ColoredString(error.message).red());
+            throw new HttpError(USER_DELETE_ERROR);
         }
     }
 }
