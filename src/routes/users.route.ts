@@ -61,6 +61,19 @@ const logoutUser = (req: RequestWithAuthenticatedUser, res: Response) => {
         ;
 }
 
+const deleteUser = (req: RequestWithAuthenticatedUser, res: Response) => {
+
+    UsersController.deleteUser(req.user)
+        .then(() => {
+            res.status(204).send();
+        })
+        .catch(error => {
+            res.status(error.httpCode).send(error.message);
+        })
+        ;
+}
+
+
 
 /*
 Route of loginUser
@@ -85,6 +98,8 @@ Example of use:
     url: "http://localhost:3000/users/logout"
 */
 router.post("/logout", passport.authenticate('jwt', { session: false }), logoutUser);
+
+router.delete("/", passport.authenticate('jwt', { session: false }), deleteUser);
 
 
 

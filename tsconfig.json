@@ -6,7 +6,7 @@
         "target": "ES2017",
         "watch": false,
         "lib": [ "es2020", "dom" ],
-        "types": [ "node" ],
+        "types": [ "node", "jest" ],
         "outDir": "dist",
         "baseUrl": ".",
         "moduleResolution": "node",
@@ -19,5 +19,8 @@
     },
     "include": [
         "src/**/*"
+    ],
+    "exclude": [
+        "src/tests/**/*"
     ]
 }

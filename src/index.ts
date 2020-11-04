@@ -29,7 +29,7 @@ DBService.on('db-disconnected', () => {
 	console.log(new ColoredString('Disconnected from DB :O').yellow());
 });
 
-async function start(): Promise<unknown> {
+export async function start(): Promise<unknown> {
 	try {
 		console.log(new ColoredString('Starting DB connection').cyan());
 
@@ -68,4 +68,4 @@ async function start(): Promise<unknown> {
 	}
 }
 
-start();
+if (process.env.NODE_ENV !== 'test') start();
