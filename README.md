@@ -33,8 +33,8 @@ Which does run this:
 
 You need to add a config file to stablish your DB options on ``/config/`` folder. There's an example of file called ``.env``, but you must create at least 2 more in order to avoid problems. You should create the following files:
 
-    * ``.env.development``
-    * ``.env.test``
+* ``.env.development``
+* ``.env.test``
 
 Use the same variables in ``.env`` file and just replace the values by your values.
 
